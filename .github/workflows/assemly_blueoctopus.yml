@@ -35,3 +35,8 @@ jobs:
           cat flaskserver_header.md > flaskserver.md
           cat flaskserver_header.md >> flaskserver.md
           cat flaskserver.md
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: flaskserver.md
