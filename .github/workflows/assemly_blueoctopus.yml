@@ -34,4 +34,4 @@ jobs:
         run: |
           cat flaskserver_header.md > flaskserver.md
           cat flaskserver_header.md >> flaskserver.md
-          echo cat flaskserver.md
+          cat flaskserver.md
