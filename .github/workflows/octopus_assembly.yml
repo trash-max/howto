@@ -29,16 +29,20 @@ jobs:
       - name: Run a multi-line script
         run: |
           mkdir site
-          cat ./flask_server/header1.md > ./site/index.md
-          cat ./flask_server/header2.md >> ./site/index.md
-          cat ./flask_server/ssh_keys.md >> ./site/index.md
-          cat ./flask_server/VM_Yandex_Cloud.md >> ./site/index.md
+          cat ./flask_server/header1.md > ./index.md
+          cat ./flask_server/header2.md >> ./index.md
+          cat ./flask_server/ssh_keys.md >> ./index.md
+          cat ./flask_server/VM_Yandex_Cloud.md >> ./index.md
           
       - name: Build html
         uses: docker://pandoc/core:2.9
         with:
           args: >-
-            --help
+            --standalone
+            --from=markdown
+            --to=html
+            --output=./site/octopus.html
+            index.md
           
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
