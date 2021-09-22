@@ -37,6 +37,10 @@ jobs:
           cat ./flask_server/06_soft_install.md >> ./site/server/index.md
           cat ./flask_server/07_sshd_config.md >> ./site/server/index.md
       
+      # Runs a set of commands using the runners shell
+      - name: Assembly_index_md
+        run: cat README.md > ./site/index.md
+      
       # Deploy our file 
       - name: Deploy_to_gh_pages
         uses: peaceiris/actions-gh-pages@v3
