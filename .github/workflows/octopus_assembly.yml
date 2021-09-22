@@ -38,20 +38,10 @@ jobs:
           cat ./flask_server/07_sshd_config.md >> ./site/server/index.md
           rm -f ./site/.nojekyll
 
-          
-#      - name: Build html
-#        uses: docker://pandoc/core:2.9
-#        with:
-#          args: >-
-#            --standalone
-#            --from=markdown
-#            --to=html
-#            --output=./site/octopus.html
-#            index.md
-          
+      
+      # Deploy our file 
       - name: Deploy_to_gh_pages
         uses: peaceiris/actions-gh-pages@v3
-       # if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
