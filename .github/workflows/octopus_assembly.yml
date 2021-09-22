@@ -33,8 +33,8 @@ jobs:
           cat ./flask_server/02_header2.md >> ./site/server/index.md
           cat ./flask_server/03_ssh_keys.md >> ./site/server/index.md
           cat ./flask_server/04_VM_Yandex.md >> ./site/server/index.md
-          cat ./flask_server/05_first_connect >> ./site/server/index.md
-          cat ./flask_server/06_soft_install >> ./site/server/index.md
+          cat ./flask_server/05_first_connect.md >> ./site/server/index.md
+          cat ./flask_server/06_soft_install.md >> ./site/server/index.md
           
 #      - name: Build html
 #        uses: docker://pandoc/core:2.9
