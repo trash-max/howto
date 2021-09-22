@@ -28,7 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Assembly_server_howto
         run: |
-          mkdir site
+          mkdir -p site/server/
           cat ./flask_server/header1.md > ./site/server/index.md
           cat ./flask_server/header2.md >> ./site/server/index.md
           cat ./flask_server/ssh_keys.md >> ./site/server/index.md
