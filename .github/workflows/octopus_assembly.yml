@@ -36,6 +36,8 @@ jobs:
           cat ./flask_server/05_first_connect.md >> ./site/server/index.md
           cat ./flask_server/06_soft_install.md >> ./site/server/index.md
           cat ./flask_server/07_sshd_config.md >> ./site/server/index.md
+          rm -f ./site/.nojekyll
+
           
 #      - name: Build html
 #        uses: docker://pandoc/core:2.9
