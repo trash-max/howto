@@ -29,10 +29,12 @@ jobs:
       - name: Assembly_server_howto
         run: |
           mkdir -p site/server/
-          cat ./flask_server/header1.md > ./site/server/index.md
-          cat ./flask_server/header2.md >> ./site/server/index.md
-          cat ./flask_server/ssh_keys.md >> ./site/server/index.md
-          cat ./flask_server/VM_Yandex_Cloud.md >> ./site/server/index.md
+          cat ./flask_server/01_header1.md > ./site/server/index.md
+          cat ./flask_server/02_header2.md >> ./site/server/index.md
+          cat ./flask_server/03_ssh_keys.md >> ./site/server/index.md
+          cat ./flask_server/04_VM_Yandex.md >> ./site/server/index.md
+          cat ./flask_server/05_first_connect >> ./site/server/index.md
+          cat ./flask_server/06_soft_install >> ./site/server/index.md
           
 #      - name: Build html
 #        uses: docker://pandoc/core:2.9
