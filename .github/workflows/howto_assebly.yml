@@ -36,13 +36,12 @@ jobs:
           cat ./flask_server/05_first_connect.md >> ./site/server/index.md
           cat ./flask_server/06_soft_install.md >> ./site/server/index.md
           cat ./flask_server/07_sshd_config.md >> ./site/server/index.md
-          rm -f ./site/.nojekyll
-
       
       # Deploy our file 
       - name: Deploy_to_gh_pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          exclude_assets: '.github,.nojekyll'
+          # exclude_assets: '.github'
           publish_dir: ./site
+          disable_nojekyll: true
