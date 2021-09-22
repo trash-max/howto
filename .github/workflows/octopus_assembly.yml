@@ -29,8 +29,10 @@ jobs:
       - name: Run a multi-line script
         run: |
           mkdir site
-          cat header.md > ./site/index.md
-          cat header2.md >> ./site/index.md
+          cat ./flask_server/header1.md > ./site/index.md
+          cat ./flask_server/header2.md >> ./site/index.md
+          cat ./flask_server/ssh_keys.md >> ./site/index.md
+          cat ./flask_server/VM_Yandex_Cloud.md >> ./site/index.md
           
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
