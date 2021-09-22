@@ -34,6 +34,11 @@ jobs:
           cat ./flask_server/ssh_keys.md >> ./site/index.md
           cat ./flask_server/VM_Yandex_Cloud.md >> ./site/index.md
           
+      - name: Build html
+        uses: docker://pandoc/core:2.9
+        with:
+          args: "--help"
+          
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
        # if: ${{ github.ref == 'refs/heads/main' }}
