@@ -6,4 +6,10 @@
 
 
 
+Утилита копирования в буфер
+
+[https://trash-max.github.io/howto/xclip/](https://trash-max.github.io/howto/xclip/)
+
+
+
 Something else ...
