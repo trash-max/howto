@@ -13,3 +13,8 @@
 
 
 Something else ...
+
+
+
+![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCSFR40osj7pJXouSiJDFXZA)
+
