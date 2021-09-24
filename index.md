@@ -1,4 +1,4 @@
-![Server blog assemly](https://github.com/trash-max/howto/actions/workflows/howto_assebly.yml/badge.svg)
+![Server blog assemly](https://github.com/trash-max/howto/actions/workflows/howto_assebly.yml/badge.svg)![GitHub last commit (branch)](https://img.shields.io/github/last-commit/trash-max/howto/master)
 
 Настройка и обслуживание сервера Flask
 
