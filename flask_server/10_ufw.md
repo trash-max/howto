@@ -34,7 +34,7 @@ sudo nano /etc/default/ufw
 IPV6=yes
 ```
 
-Сохраняем и закрываем файл конфигурации. Если вы как и я используете редактор nano, то просто нажмите Ctrl+x
+Сохраняем и закрываем файл. Если вы как и я используете редактор nano, то просто нажмите Ctrl+x
 
 
 
@@ -62,7 +62,7 @@ sudo ufw app list
 
 ```bash
 Available applications:
-  Flask
+ 
   Nginx Full
   Nginx HTTP
   Nginx HTTPS

@@ -39,6 +39,8 @@ jobs:
           cat ./flask_server/08_nginx_install.md >> ./site/server/index.md
           cat ./flask_server/09_end_base_step.md >> ./site/server/index.md
           cat ./flask_server/10_ufw.md >> ./site/server/index.md
+          cat ./flask_server/11_a_record.md >> ./site/server/index.md
+          cat ./flask_server/12_flask.md >> ./site/server/index.md
           cat ./flask_server/99_footer.md >> ./site/server/index.md
           
       # Runs a set of commands using the runners shell
