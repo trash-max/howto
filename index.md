@@ -2,7 +2,11 @@
 
 ![Last commt](https://img.shields.io/github/last-commit/trash-max/howto/master)   
 
-Настройка и обслуживание сервера Flask
+Пишешь свою игру с поддержкой сети? Планируешь свой сайт или веб-сервис? Бот для телеграмма или навык Яндекс Алисы?
+
+Всему этому нужен backend. А backend'у нужна инфраструктура.
+
+Поднимаем свой сервер со своим доменом в интернете на Ubuntu Linux, настраиваем  стек Nginx + Gunicorn + Flask, защищаем все соединения при помощи  SSL.
 
 [https://trash-max.github.io/howto/server/](https://trash-max.github.io/howto/server/)
 
