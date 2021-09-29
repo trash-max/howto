@@ -37,7 +37,7 @@ sudo mc
 Раскомментируем строку и ставим значение в **no**:
 
 ```bash
-PermitRootLogin no
+PermitRootLogin No
 ```
 
 Никаких удаленных авторизаций и входов для root
