@@ -1,6 +1,10 @@
 ![Server blog assemly](https://github.com/trash-max/howto/actions/workflows/howto_assebly.yml/badge.svg)
 
-![Last commt](https://img.shields.io/github/last-commit/trash-max/howto/master)   
+![Last commt](https://img.shields.io/github/last-commit/trash-max/howto/master)
+
+![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCSFR40osj7pJXouSiJDFXZA)
+
+
 
 Пишешь свою игру с поддержкой сети? Планируешь свой сайт или веб-сервис? Бот для телеграмма или навык Яндекс Алисы?
 
@@ -24,9 +28,6 @@
 
 
 
-Something else ...
+Дополнить:
 
-
-
-![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCSFR40osj7pJXouSiJDFXZA)
-
+[https://github.com/trash-max/howto](https://github.com/trash-max/howto)
