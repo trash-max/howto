@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a set of commands using the runners shell
+      # Assembly how-to files to index.md
       - name: Assembly_server_howto
         run: |
           mkdir -p site/server/
@@ -41,15 +41,19 @@ jobs:
           cat ./flask_server/10_ufw.md >> ./site/server/index.md
           cat ./flask_server/11_a_record.md >> ./site/server/index.md
           cat ./flask_server/12_flask.md >> ./site/server/index.md
+          cat ./flask_server/13_gunicorn.md >> ./site/server/index.md
           cat ./flask_server/99_footer.md >> ./site/server/index.md
           
-      # Runs a set of commands using the runners shell
       - name: Assembly_xclip_md
         run: |
           mkdir -p site/xclip/
           cat xclip.md > ./site/xclip/index.md
       
-      # Runs a set of commands using the runners shell
+      - name: Assembly_aliases_md
+        run: |
+          mkdir -p site/aliases/
+          cat aliases.md > ./site/aliases/index.md
+      
       - name: Assembly_index_md
         run: cat README.md > ./site/index.md
       

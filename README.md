@@ -18,6 +18,12 @@
 
 
 
+Создание псевдонимов команд
+
+[https://trash-max.github.io/howto/aliases/](https://trash-max.github.io/howto/aliases/)
+
+
+
 Something else ...
 
 
