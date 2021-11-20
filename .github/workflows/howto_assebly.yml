@@ -42,6 +42,7 @@ jobs:
           cat ./flask_server/11_a_record.md >> ./site/server/index.md
           cat ./flask_server/12_flask.md >> ./site/server/index.md
           cat ./flask_server/13_gunicorn.md >> ./site/server/index.md
+          cat ./flask_server/14_nginx_80_proxy.md >> ./site/server/index.md
           cat ./flask_server/99_footer.md >> ./site/server/index.md
           
       - name: Assembly_xclip_md
