@@ -63,7 +63,7 @@ Systemd запускает сервисы, которые описаны в ег
 Создадим такой файл:
 
 ```bash
-sudo nano /etc/systemd/system/blueoctopusgu.service
+sudo nano /etc/systemd/system/blueoctopus.service
 ```
 
 Думаю, вас уже не удивит, если я скажу, что файл имеет такой синтаксис:
@@ -93,9 +93,9 @@ Group=www-data
 # Где его запускать
 WorkingDirectory=/home/trash/blueoctopus
 # Путь к виртуальному окружению, в котором его запускать
-Envirovement="PATH=/home/trash/flaskproject/flaskenv/bin"
+Envirovement="PATH=/home/max/blueoctopus/octopusenv/bin"
 # Команда запуска сервиса с параметрами, о ней ниже
-ExecStart=/home/trash/blueoctopus/blueoctopusenv/bin/gunicorn --workers 2 --bind unix:gunicorn.sock -m 007 wsgi:app
+ExecStart=/home/max/blueoctopus/octopusenv/bin/gunicorn --workers 2 --bind unix:gunicorn.sock -m 007 wsgi:app
 
 # Здесь опишем на каком уровне стартует наш сервис
 [Install]
@@ -106,7 +106,7 @@ WantedBy=multi-user.target
 
 Команда запуска:
 
-/home/trash/flaskproject/flaskenv/bin/gunicorn - Полный путь к исполняемому файлу.
+/home/max/blueoctopus/octopusenv/bin/gunicorn - Полный путь к исполняемому файлу.
 
 --workers 2 - Количество процессов запускаемых сервером, я поставил два, по количеству ядер процессора на нашем сервере.
 
@@ -125,19 +125,19 @@ wsgi:app - ну и наконец код, который должен запус
 Запустить:
 
 ```bash
-sudo systemctl start blueoctopusgu
+sudo systemctl start blueoctopus
 ```
 
 Посмотреть статус:
 
 ```bash
-sudo systemctl status blueoctopusgu
+sudo systemctl status blueoctopus
 ```
 
 И вот теперь мы добавим его в автозагрузку:
 
 ```bash
-sudo systemctl enable blueoctopusgu
+sudo systemctl enable blueoctopus
 ```
 
 
