@@ -44,21 +44,26 @@ jobs:
           cat ./flask_server/13_gunicorn.md >> ./site/server/index.md
           cat ./flask_server/14_nginx_80_proxy.md >> ./site/server/index.md
           cat ./flask_server/99_footer.md >> ./site/server/index.md
-          
+
       - name: Assembly_xclip_md
         run: |
           mkdir -p site/xclip/
           cat xclip.md > ./site/xclip/index.md
-      
+
       - name: Assembly_aliases_md
         run: |
           mkdir -p site/aliases/
           cat aliases.md > ./site/aliases/index.md
-      
+
+      - name: Assembly_keystote_md
+        run: |
+          mkdir -p site/keystore/
+          cat keystore.md > ./site/keystore/index.md
+
       - name: Assembly_index_md
         run: cat README.md > ./site/index.md
-      
-      # Deploy our file 
+
+      # Deploy our file
       - name: Deploy_to_gh_pages
         uses: peaceiris/actions-gh-pages@v3
         with:

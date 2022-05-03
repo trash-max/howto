@@ -24,6 +24,11 @@
 
 
 
+Создание ключей для подписи Anroid приложений в Godot:
+
+[https://trash-max.github.io/howto/keystore/](https://trash-max.github.io/howto/keystore/)
+
+
 Дополнить:
 
 [https://github.com/trash-max/howto](https://github.com/trash-max/howto)
