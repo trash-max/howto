@@ -1058,127 +1058,11 @@ sudo systemctl enable blueoctopus
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### Nginx proxy config
 
 Ожидаемую схему работы, я уже не раз приводил выше, уточню только, что сейчас мы будем конфигурировать ту часть, где nginx передает (проксирует) входящий запрос в gunicorn.
 
-Напомню, что мы создали unit - файл для gunicorn, в котором указали некой точкой связи с nginx  служебный файл gunicorn.sock. Теперь он при старте системы автоматически загружается и ожидает появления в нем входящих запросов. 
+Напомню, что мы создали unit - файл для gunicorn, в котором указали некой точкой связи с nginx  служебный файл gunicorn.sock. Теперь он при старте системы автоматически загружается и ожидает появления в нем входящих запросов.
 
 Теперь нам необходимо сконфигурировать nginx, что бы он так же передавал в этот системный файл (сокет, если хотите) входящие запросы. Давайте взглянем на его основной конфигурационный файл:
 
@@ -1203,7 +1087,7 @@ include /etc/nginx/sites-enabled/*;
 
 
 
-На месте 
+На месте
 
 ```bash
 include /etc/nginx/sites-enabled/*;
@@ -1217,20 +1101,11 @@ include /etc/nginx/sites-enabled/*;
 include /etc/nginx/conf.d/*.conf;
 ```
 
-Это, так называемые drop-in файлы, которые, как мы помним из части про юниты, не только расширяют конфигурацию, но и переопределят параметры, указанные в основном файле. То есть, нам вообще не надо вносить никаких изменений в оригинальном файле, а достаточно еще раз указать параметр с требуемым значением здесь, и он будет учтен системой. 
+Это, так называемые drop-in файлы, которые, как мы помним из части про юниты, не только расширяют конфигурацию, но и переопределят параметры, указанные в основном файле. То есть, нам вообще не надо вносить никаких изменений в оригинальном файле, а достаточно еще раз указать параметр с требуемым значением здесь, и он будет учтен системой.
 
 В этом есть еще один плюс - что бы вернуть систему в дефолтное состояние достаточно будет просто удалить файл из conf.d директории.
 
 Этот вариант в данном случае, нас устраивает, поэтому давайте создадим новый файл конфигурации:
-
-
-
-
-
-
-
-
-
 
 
 ```bash
@@ -1244,7 +1119,236 @@ server {
         proxy_pass http://unix:/home/trash/flaskproject/flaskproject.sock;
     }
 }
-```#### Есть что дополнить?
+```
+
+
+Сайт будет один, потому функционал с симлинками использовать не будем.
+
+Симлинк в sites-enabled для default домена также удалим.
+
+
+
+И немного магии: надо в nginx.conf раскомментировать строку
+
+```bash
+server_names_hash_bucket_size 64;
+```
+#### UFW
+
+Теперь не забыть убрать проброшеный 5000 порт в файрволе
+
+```bash
+sudo ufw status
+```
+
+
+
+```bash
+sudo ufw delete allow 5000
+```
+#### letsencript
+
+Теперь займемся защитой. (Не обязательный пункт)
+
+Ставим сертификат от letsencript. Рекомендуется ставить с помощью специального бота:
+
+ссылка
+
+https://certbot.eff.org/
+
+Раньше бота можно было ставить напрямую из репозитория
+
+```bash
+sudo apt install certbot certbot-python-nginx
+```
+
+Но сейчас так не работает, поскольку все переехало на снап.
+
+(Хорошо это или плохо, тема отдельного холливара)
+
+https://snapcraft.io/ - это для убунту
+
+https://flathub.org/home - для гнома
+
+В общем ставим
+
+
+Проверим наличие Snap:
+
+```bash
+sudo snap
+```
+
+Если нет - ставим.
+
+https://snapcraft.io/docs/installing-snapd
+
+```bash
+sudo apt install snapd
+```
+
+Установим самого бота:
+```bash
+sudo snap install --classic certbot
+```
+
+И пробросим символьную ссылку:
+```bash
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+```
+
+
+Автоматический режим установки сертификатов может не помочь, будем ставить вручную.
+
+(Это удобно, может у вас еще откуда есть сертификаты.)
+
+```bash
+sudo certbot certonly --nginx
+```
+
+ключ certonly говорит только загрузить сертификаты.
+
+По умолчанию сертификаты залиты в:
+
+/etc/letsencrypt/
+
+Для проверки возможности обновления сущеуствует ключ
+
+(Без самого обновления)
+
+```bash
+sudo certbot renew --dry-run
+```
+
+Сами сертификаты лежат в ../live/host-name
+#### Nginx и https
+
+Допишем секцию server в нашем конфиге, теперь он выглядит так:
+
+```
+server {
+    listen 80;
+    listen [::]:80;
+
+    # server_name your_domain www.your_domain;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/trash/flaskproject/flaskproject.sock;
+    }
+
+}
+
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    server_name flaskserver.deadend.xyz;
+
+    #ssl on;
+    ssl_certificate /etc/letsencrypt/live/flaskserver.deadend.xyz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/flaskserver.deadend.xyz/privkey.pem;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/trash/flaskproject/flaskproject.sock;
+    }
+
+}
+```
+
+Далее опять запускаем запускаем тест конфигурации:
+
+```bash
+sudo nginx -t
+```
+
+И если нет ошибок:
+
+```
+sudo systemctl nginx reload
+```
+
+теперь откроем в браузере и увидим, что работает все на https
+
+далее надо решить с 80 портом. Закрывать не вариант, так что делаем переадресацию
+
+Опять идем в кофиг сайта на nginx
+
+теперь он должен выглядеть так
+
+
+
+```bash
+server {
+    listen 80;
+    listen [::]:80;
+    # server_name your_domain www.your_domain;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/trash/flaskproject/flaskproject.sock;
+    }
+
+}
+
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    server_name flaskserver.deadend.xyz;
+
+    #ssl on;
+    ssl_certificate /etc/letsencrypt/live/flaskserver.deadend.xyz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/flaskserver.deadend.xyz/privkey.pem;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/trash/flaskproject/flaskproject.sock;
+    }
+
+}
+```
+
+Далее опять запускаем запускаем тест конфигурации
+
+```bash
+sudo nginx -t
+```
+
+И если нет ошибок:
+
+```bash
+sudo systemctl nginx reload
+```
+
+После чего в браузере открываем ссылку http и видим переадресацию на https
+#### Автоматическое обновление сертификата
+
+Осталось настроить автоматическое обновление сертификатов
+
+В "ручную" обновляется командой:
+
+```
+certbot renew
+```
+
+
+
+для автоматизации воспользуемся cron`ом.
+
+```
+sudo crontab -e
+```
+
+
+
+Стоит уточнить, что  крону нужны полные пути.
+
+```
+30 2 15 * * /usr/bin/certbot renew >> /var/log/renew-ssl.log
+```
+
+В 2:30, 15 числа, каждого месяца, в любой день недели выполнить  обновление и записать результат в лог
+#### Есть что дополнить?
 
 
 
